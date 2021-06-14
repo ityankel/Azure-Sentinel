@@ -1,8 +1,21 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "metadata":{
+        "title": "Adds something to Cisco ASA",
+        "description": "something something about Cisco ASA.",
+        "lastUpdateTime": "2021-05-18T12:12:01.001Z",
+        "entities": ["Account"],
+        "tags": ["Orchestration", "Response"],
+        "source": {
+            "kind": "Microsoft"
+        },
+        "author": {
+            "name": "Nicholas DiCola"
+        }
+    },
     "parameters": {
-        "Playbook Name": {
+        "PlaybookName": {
             "defaultValue": "CiscoASA-AddIPtoNetworkObjectGroup",
             "type": "String",
             "metadata": {
@@ -68,8 +81,12 @@
         {
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2017-07-01",
-            "name": "[parameters('Playbook Name')]",
+            "name": "[parameters('PlaybookName')]",
             "location": "[resourceGroup().location]",
+            "tags": {
+                "hidden-SentinelTemplateName": "CiscoASA-AddIPtoNetworkObjectGroup",
+                "hidden-SentinelTemplateVersion": "1.0"
+            },
             "dependsOn": [
                 "[resourceId('Microsoft.Web/connections', variables('AzureSentinelConnectionName'))]",
                 "[resourceId('Microsoft.Web/connections', variables('TeamsConnectionName'))]",
